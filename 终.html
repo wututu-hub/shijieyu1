@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>世界语知多少</title>
+    <style type="text/css">
+        /* ... (之前的CSS样式保持不变) ... */
+		body {
+		     background-image: url("img/背景图片.jpg");
+		     background-repeat: no-repeat;
+		     background-size: cover;
+		 }
+		
+		.image1 {
+		     text-align: center;
+		     margin-top: 300px;
+		     margin-left: 100px;
+		     margin-right: 100px;
+		 }
+		
+		 /* 公用样式 */
+		 html,
+		 body {
+		     width: 100%;
+		     height: 100%;
+		     margin: 0px;
+		 }
+		
+		 ul {
+		     list-style-type: none;
+		     margin: 0px auto;
+		     padding: 0px;
+		 }
+		
+		 /* 导航菜单 */
+		.menu {
+		     background-color: #000000;
+		     color: #ffffff;
+		     width: 100%;
+		 }
+		
+		.menu ul {
+		     width: 100%;
+		     display: flex;
+		     justify-content: center;
+		 }
+		
+		.menu ul li {
+		     width: 500px;
+		     line-height: 50px;
+		     text-align: center;
+		     cursor: pointer;
+		 }
+		
+		.menu ul li:hover {
+		     background-color: #333333;
+		 }
+		
+		 /* 图片列表 */
+		.image_list {
+		     margin: 50px auto 0px auto;
+		     width: 80%;
+		     height: 70%;
+		 }
+		
+		.image_list ul {
+		     width: 100%;
+		     height: 100%;
+		     display: flex;
+		     justify-content: space-around;
+		 }
+		
+		.image_list ul li {
+		     width: 12%;
+		     height: 100%;
+		     border-radius: 25px;
+		     background-position: center;
+		     background-repeat: no-repeat;
+		     background-size: auto 100%;
+		     opacity: 0.7;
+		 }
+		
+		.image_list ul li:hover {
+		     opacity: 1;
+		 }
+		
+		.image_list ul li:nth-of-type(1) {
+		     background-image: url("img/131.jpg");
+		 }
+		
+		.image_list ul li:nth-of-type(2){
+			 background-image:url("img/132.jpg");
+		 }
+		.image_list ul li:nth-of-type(3){
+			 background-image:url("img/133.png");
+		 }
+		.image_list ul li:nth-of-type(4){
+			 background-image:url("img/134.png");
+		 }
+		.image_list ul li:nth-of-type(5){
+			 background-image:url("img/135.jpeg");
+		 }
+		.image_list ul li:nth-of-type(6){
+			 background-image:url("img/136.jpg");
+		 }
+		.image_list ul li:nth-of-type(7){
+			 background-image:url("img/137.jpeg");
+		 }
+		.image_list ul li:nth-of-type(8){
+			 background-image:url("img/138.png");
+		 }
+				/* 在之前的CSS后面添加以下样式 */
+		.largeImageContainer {
+			 position: fixed;
+			 top: 0;
+			 left: 0;
+			 width: 100%;
+			 height: 100%;
+			 background-color: rgba(0, 0, 0, 0.8); /* 半透明黑色背景 */
+			 display: none; /* 初始隐藏 */
+			 justify-content: center;
+			 align-items: center;
+			 z-index: 1000; /* 确保它显示在其他内容之上 */
+		 }
+				
+		.largeImageContainer img {
+			 max-width: 90%;
+			 max-height: 90%;
+		 }
+				
+		.largeImageContainer button {
+			 position: absolute;
+		     top: 20px;
+			 right: 20px;
+			 background-color: #ffffff;
+			 border: none;
+			 padding: 10px;
+			 cursor: pointer;
+		 }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <ul>
+            <li>首页</li>
+            <li>世界语介绍</li>
+            <li>相关展示</li>
+            <li>知识竞答</li>
+            <li>个人主页</li>
+        </ul>
+    </div>
+    <div class="image_list">
+        <ul>
+            <li onclick="showLargeImage('img/131.jpg', '描述图片131的内容')"><img src="img/131_small.jpg" alt="小图131"></li>
+            <li onclick="showLargeImage('img/132.jpg', '描述图片132的内容')"><img src="img/132_small.jpg" alt="小图132"></li>
+            <li onclick="showLargeImage('img/133.png', '描述图片133的内容')"><img src="img/133_small.png" alt="小图133"></li>
+            <li onclick="showLargeImage('img/134.png', '描述图片134的内容')"><img src="img/134_small.png" alt="小图134"></li>
+            <li onclick="showLargeImage('img/135.jpeg', '描述图片135的内容')"><img src="img/135_small.jpeg" alt="小图135"></li>
+            <li onclick="showLargeImage('img/136.jpg', '描述图片136的内容')"><img src="img/136_small.jpg" alt="小图136"></li>
+            <li onclick="showLargeImage('img/137.jpeg', '描述图片137的内容')"><img src="img/137_small.jpeg" alt="小图137"></li>
+            <li onclick="showLargeImage('img/138.png', '描述图片138的内容')"><img src="img/138_small.png" alt="小图138"></li>
+        </ul>
+    </div>
+    <!-- 大图显示区域 -->
+    <div id="largeImageContainer" class="largeImageContainer">
+        <img id="largeImage" src="" alt="">
+        <p id="largeImageDescription"></p>
+        <button onclick="hideLargeImage()">关闭</button>
+    </div>
+
+    <script>
+        function showLargeImage(src, description) {
+            var largeImageContainer = document.getElementById('largeImageContainer');
+            var largeImage = document.getElementById('largeImage');
+            var largeImageDescription = document.getElementById('largeImageDescription');
+
+            largeImage.src = src;
+            largeImageDescription.textContent = description;
+            largeImageContainer.style.display = 'flex'; // 使用flex布局来居中显示大图和其他元素
+        }
+
+        function hideLargeImage() {
+            var largeImageContainer = document.getElementById('largeImageContainer');
+            largeImageContainer.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
